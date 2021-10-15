@@ -5,9 +5,10 @@ on:
     branches: [ main ]
 
 jobs:
-  run:
+  run_dev:
 
     runs-on: ubuntu-latest
+    environment: dev
 
     steps:
     - uses: actions/checkout@v2
@@ -21,3 +22,19 @@ jobs:
       env:
         MYAPP_SECRET: ${{ secrets.MYAPP_SECRET }}
         
+  run_prod:
+
+    runs-on: ubuntu-latest
+    environment: prod
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+        include-prerelease: true
+    - name: Run
+      run: dotnet run
+      env:
+        MYAPP_SECRET: ${{ secrets.MYAPP_SECRET }}
