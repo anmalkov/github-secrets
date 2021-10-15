@@ -3,11 +3,9 @@ name: .NET
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
-  build:
+  run:
 
     runs-on: ubuntu-latest
 
@@ -18,9 +16,5 @@ jobs:
       with:
         dotnet-version: 6.0.x
         include-prerelease: true
-    #- name: Restore dependencies
-    #  run: dotnet restore
-    #- name: Build
-    #  run: dotnet build --no-restore
     - name: Run
       run: dotnet run
